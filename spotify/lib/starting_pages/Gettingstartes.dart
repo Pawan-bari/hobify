@@ -11,7 +11,7 @@ class _GettingStartedState extends State<GettingStarted> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: Container(
         height: MediaQuery.of(context).size.height * 1,
         decoration: const BoxDecoration(
@@ -70,4 +70,3 @@ class _GettingStartedState extends State<GettingStarted> {
     );
   }
 }
-    

@@ -121,7 +121,10 @@ class _LoginuiState extends State<Loginui> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Not A Member ? ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                TextButton(onPressed: (){}, child: Text('Register Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
+                TextButton(onPressed: (){
+
+                  Navigator.pushNamed(context, 'register');
+                }, child: Text('Register Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
               ],
             )
 

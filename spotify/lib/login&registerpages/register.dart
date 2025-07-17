@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/login&registerpages/loginui.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -14,7 +15,7 @@ class _RegisterState extends State<Register> {
       backgroundColor: Color.fromRGBO(28, 27, 27, 1),
       appBar: AppBar(
         leading: IconButton(onPressed: (){
-          Navigator.pop(context , 'login');
+          Navigator.popAndPushNamed(context, 'login');
         }, icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
         centerTitle: true, 
       title: Image(image: Image.asset('Images/Vector.png').image),
@@ -130,8 +131,10 @@ class _RegisterState extends State<Register> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Not A Member ? ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                TextButton(onPressed: (){}, child: Text('Register Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
+                Text('Already have an Account ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                TextButton(onPressed: (){
+                  Navigator.pushNamed(context, 'loginui');
+                }, child: Text('Login Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
               ],
             )
 
