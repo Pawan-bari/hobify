@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GettingStarted extends StatefulWidget {
-  const GettingStarted({super.key, required String title});
+  const GettingStarted({super.key,});
 
   @override
   State<GettingStarted> createState() => _GettingStartedState();
