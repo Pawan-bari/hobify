@@ -5,10 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         
+        
         {
             "name": "spotify",
             "cwd": "spotify",
             "request": "launch",
+            "program": "lib/main.dart",
             "type": "dart"
         },
         {
@@ -16,6 +18,7 @@
             "cwd": "spotify",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "flutterMode": "profile"
         },
         {
@@ -23,6 +26,7 @@
             "cwd": "spotify",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "flutterMode": "release"
         }
     ]

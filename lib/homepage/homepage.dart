@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:spotify/homepage/profile/profile.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
-
+  
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
+  int _selectindex = 0;
+
+  final List<Widget> _pages = [
+    
+    Profile(),
+  ];
+
   final String url ='https://i.pinimg.com/736x/2b/bc/47/2bbc47578113791e42e1063d39acd9e3.jpg';
   @override
   Widget build(BuildContext context) {
@@ -23,6 +32,7 @@ class _HomepageState extends State<Homepage> {
         IconButton(onPressed: (){}, icon: Icon(Icons.more_vert, color: Color.fromRGBO(255, 255, 255, 1),))
       ],
       ),
+      body: _pages[_selectindex],
       bottomNavigationBar: Container(
         color: Colors.transparent,
         child: Padding(
@@ -35,6 +45,12 @@ class _HomepageState extends State<Homepage> {
             activeColor: Colors.white,
             tabBackgroundColor: Colors.grey.shade800,
             gap: 8,
+            selectedIndex: _selectindex,
+            onTabChange: (index){
+              setState(() {
+                _selectindex = index;
+              });
+            }  ,
             padding: EdgeInsets.all(8.0),
             tabs: [
           
@@ -42,15 +58,13 @@ class _HomepageState extends State<Homepage> {
                     ,text: 'Home',),
             GButton(icon: Icons.search,
                     text: 'Search',),
-            GButton(icon: Icons.library_books,
+            GButton(icon:  HugeIcons.strokeRoundedLibraries,
                     text: 'Library',),
-                    GButton(leading: CircleAvatar(
+            GButton(leading: CircleAvatar(
                       backgroundImage: NetworkImage(url),
                     ),icon: Icons.abc_outlined,
                     text: 'Profile',
-                    onPressed: (){
-                      
-                    },)
+                    )
           ]),
         ),
       ),

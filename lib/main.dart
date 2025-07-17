@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:spotify/controller/Authentication/auth_state.dart';
 import 'package:spotify/homepage/homepage.dart';
+import 'package:spotify/homepage/profile/profile.dart';
 import 'package:spotify/login&registerpages/login.dart';
 import 'package:spotify/login&registerpages/loginui.dart';
 import 'package:spotify/login&registerpages/register.dart';
@@ -39,8 +40,9 @@ class MyApp extends StatelessWidget {
         'login': (context) => const Login(),
         'loginui':(context) => const Loginui(),
         'register':(context) => const Register(),
-        'homepage':(context) => const Homepage()
-      },
+        'homepage':(context) => const Homepage(),
+        'profile' :(context) => const Profile(),
+              },
       
       debugShowCheckedModeBanner: false,
       
