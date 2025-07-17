@@ -98,7 +98,9 @@ class _RegisterState extends State<Register> {
              SizedBox(height: 40,),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
-              child: ElevatedButton(onPressed: (){}, child: Text('Create Account',
+              child: ElevatedButton(onPressed: (){
+
+              }, child: Text('Create Account',
               style: TextStyle(
                 color: Colors.white,fontSize: 25,
                 fontWeight: FontWeight.bold),
@@ -143,5 +145,17 @@ class _RegisterState extends State<Register> {
         ),
       ),
     );
+  }
+
+  void register() {
+    
+
+
+
+    poppage();
+  }
+
+  void poppage() {
+    Navigator.pop(context);
   }
 }
