@@ -1,20 +1,65 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:spotify/controller/Authentication/auth_services.dart';
+import 'package:spotify/login&registerpages/loginui.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
 
   @override
+
   State<Register> createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
+  TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerPass = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  String errmsg ='';
+  
+  @override
+  void dispose(){
+    controllerEmail.dispose();
+    controllerPass.dispose();
+    super.dispose();
+  }
+
+  
+void register() async {
+
+  if (controllerEmail.text.trim().isEmpty || controllerPass.text.trim().isEmpty) {
+    setState(() {
+      errmsg = "Email and password fields cannot be empty";
+    });
+    return;
+  }
+
+  try {
+    await authServices.value.createuser(
+      email: controllerEmail.text.trim(),
+      pass: controllerPass.text.trim(),
+    );
+    push();
+  } on FirebaseAuthException catch (e) {
+    setState(() {
+      errmsg = e.message ?? "There is an error";
+    });
+  }
+  
+}
+void push()async{
+  Navigator.pushNamed(context, 'homepage');
+}
+
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(28, 27, 27, 1),
       appBar: AppBar(
         leading: IconButton(onPressed: (){
-          Navigator.pop(context , 'login');
+          Navigator.popAndPushNamed(context, 'login');
         }, icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
         centerTitle: true, 
       title: Image(image: Image.asset('Images/Vector.png').image),
@@ -43,7 +88,7 @@ class _RegisterState extends State<Register> {
             const EdgeInsets.only(left: 25, right: 25),
             child: TextField(
               style: TextStyle(color: Colors.white,height: 3),
-              obscureText: true,
+              
               decoration: InputDecoration(
                                
                 hintText:   '    Full Name',
@@ -60,6 +105,7 @@ class _RegisterState extends State<Register> {
              Padding(
              padding: const EdgeInsets.only(left: 25, right: 25),
              child: TextField(
+              controller: controllerEmail,
               style: TextStyle(color: Colors.white,height: 3),
               decoration: InputDecoration(
                 hintText: '    Enter Email',
@@ -80,7 +126,7 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 20,),
             Padding(padding: 
             const EdgeInsets.only(left: 25, right: 25),
-            child: TextField(
+            child: TextField(controller:  controllerPass,
               style: TextStyle(color: Colors.white,height: 3),
               obscureText: true,
               decoration: InputDecoration(
@@ -94,10 +140,13 @@ class _RegisterState extends State<Register> {
               ),
             )
             ),
+            Text(errmsg,style: TextStyle(color: Colors.red),),
              SizedBox(height: 40,),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
-              child: ElevatedButton(onPressed: (){}, child: Text('Create Account',
+              child: ElevatedButton(onPressed: (){
+                register();
+              }, child: Text('Create Account',
               style: TextStyle(
                 color: Colors.white,fontSize: 25,
                 fontWeight: FontWeight.bold),
@@ -130,8 +179,10 @@ class _RegisterState extends State<Register> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Not A Member ? ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                TextButton(onPressed: (){}, child: Text('Register Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
+                Text('Already have an Account ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                TextButton(onPressed: (){
+                  Navigator.pushNamed(context, 'loginui');
+                }, child: Text('Login Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
               ],
             )
 
@@ -141,4 +192,7 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
+  
+
+  
 }

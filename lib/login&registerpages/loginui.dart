@@ -15,7 +15,7 @@ class _LoginuiState extends State<Loginui> {
       backgroundColor: Color.fromRGBO(28, 27, 27, 1),
       appBar: AppBar(
         leading: IconButton(onPressed: (){
-          Navigator.pop(context);
+          Navigator.popAndPushNamed(context ,'login');
         }, icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
         centerTitle: true, 
       title: Image(image: Image.asset('Images/Vector.png').image),
@@ -121,7 +121,10 @@ class _LoginuiState extends State<Loginui> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Not A Member ? ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                TextButton(onPressed: (){}, child: Text('Register Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
+                TextButton(onPressed: (){
+
+                  Navigator.pushNamed(context, 'register');
+                }, child: Text('Register Now',style: TextStyle(color: Color.fromRGBO(40, 140, 233, 1)),))
               ],
             )
 
