@@ -15,7 +15,7 @@ class _LoginuiState extends State<Loginui> {
       backgroundColor: Color.fromRGBO(28, 27, 27, 1),
       appBar: AppBar(
         leading: IconButton(onPressed: (){
-          Navigator.pop(context);
+          Navigator.popAndPushNamed(context ,'login');
         }, icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
         centerTitle: true, 
       title: Image(image: Image.asset('Images/Vector.png').image),

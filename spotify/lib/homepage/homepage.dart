@@ -14,7 +14,7 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Color.fromRGBO(28, 27, 27, 1),
       appBar: AppBar(
           leading: IconButton(onPressed: (){
-          Navigator.pop(context , 'login');
+          Navigator.popAndPushNamed(context , 'login');
         }, icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
         centerTitle: true, 
       title: Image(image: Image.asset('Images/Vector.png').image),
