@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:spotify/controller/Authentication/auth_state.dart';
 import 'package:spotify/homepage/homepage.dart';
+import 'package:spotify/homepage/profile/delete.dart';
 import 'package:spotify/homepage/profile/profile.dart';
+import 'package:spotify/homepage/profile/updateusername.dart';
 import 'package:spotify/login&registerpages/login.dart';
 import 'package:spotify/login&registerpages/loginui.dart';
+import 'package:spotify/login&registerpages/recoverpass.dart';
 import 'package:spotify/login&registerpages/register.dart';
 import 'package:spotify/starting_pages/Gettingstartes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,6 +45,9 @@ class MyApp extends StatelessWidget {
         'register':(context) => const Register(),
         'homepage':(context) => const Homepage(),
         'profile' :(context) => const Profile(),
+        'recoverpass' :(context) => const Recoverpass(),
+        'updateusername' :(context) => const Updateusername(),
+        'delete':(context)=>const Delete(),
               },
       
       debugShowCheckedModeBanner: false,

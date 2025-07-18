@@ -14,6 +14,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
+  TextEditingController controllername = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String errmsg ='';
   
@@ -21,6 +22,7 @@ class _RegisterState extends State<Register> {
   void dispose(){
     controllerEmail.dispose();
     controllerPass.dispose();
+    controllername.dispose();
     super.dispose();
   }
 
@@ -39,6 +41,7 @@ void register() async {
       email: controllerEmail.text.trim(),
       pass: controllerPass.text.trim(),
     );
+    await authServices.value.updateusername(username: controllername.text);
     push();
   } on FirebaseAuthException catch (e) {
     setState(() {
@@ -86,12 +89,12 @@ void push()async{
               SizedBox(height: 20,),
             Padding(padding: 
             const EdgeInsets.only(left: 25, right: 25),
-            child: TextField(
+            child: TextField(controller:  controllername,
               style: TextStyle(color: Colors.white,height: 3),
               
               decoration: InputDecoration(
                                
-                hintText:   '    Full Name',
+                hintText:   '     Name',
                 hintStyle: TextStyle(color: Colors.white),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),

@@ -72,6 +72,9 @@ flutter:
      - Images/Vector.png
      - Images/Vector (1).png
      - Images/Group 26.png
+     - Images/lock.png
+     - Images/2541991.png
+     - Images/re.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,4 +1,9 @@
+import 'dart:ui';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:spotify/controller/Authentication/auth_services.dart';
+import 'package:spotify/homepage/homepage.dart';
 
 class Loginui extends StatefulWidget {
   const Loginui({super.key});
@@ -8,7 +13,46 @@ class Loginui extends StatefulWidget {
 }
 
 class _LoginuiState extends State<Loginui> {
+  TextEditingController controlleremail = TextEditingController();
+  TextEditingController controllerpass = TextEditingController();
+  final formkey = GlobalKey<FormState>();
+  String Errmsg = '';
   @override
+  void dispose(){
+    controlleremail.dispose();
+    controllerpass.dispose();
+    super.dispose();
+  }
+
+  void signin()async{
+    if (controlleremail.text.trim().isEmpty || controllerpass.text.trim().isEmpty) {
+    setState(() {
+      Errmsg = "Email and password fields cannot be empty";
+    });
+    return;
+  }
+    try {
+      await authServices.value.signin(email: controlleremail.text,password: controllerpass.text);
+     poppage();  
+    } on FirebaseAuthException catch (e) {
+      Errmsg = e.message ?? 'not working'; 
+      final msg = e.message ?? 'Something went wrong';
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(msg),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 3)));
+    }
+
+  }
+
+  void poppage(){
+    Navigator.pushNamed(context, 'homepage');
+  }
+
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       
@@ -42,7 +86,7 @@ class _LoginuiState extends State<Loginui> {
             SizedBox(height: 20,),
            Padding(
              padding: const EdgeInsets.only(left: 25, right: 25),
-             child: TextField(
+             child: TextField(controller: controlleremail,
               style: TextStyle(color: Colors.white,height: 3),
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
@@ -63,6 +107,7 @@ class _LoginuiState extends State<Loginui> {
             Padding(padding: 
             const EdgeInsets.only(left: 25, right: 25),
             child: TextField(
+              controller: controllerpass,
               style: TextStyle(color: Colors.white,height: 3),
               obscureText: true,
               decoration: InputDecoration(
@@ -75,19 +120,25 @@ class _LoginuiState extends State<Loginui> {
                 )
               ),
             )
+            
             ),
+            Text(Errmsg,style: TextStyle(color: Colors.red),),
             SizedBox(height: 15,),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(padding: EdgeInsets.only(left: 25),
-              child: TextButton(onPressed: () {}, child: Text( 'Recovery password',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),),)
+              child: TextButton(onPressed: () {
+                Navigator.pushNamed(context, 'recoverpass');
+              }, child: Text( 'Recovery password',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),),)
               )
             ,
             
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
-              child: ElevatedButton(onPressed: (){}, child: Text('Sign In',
+              child: ElevatedButton(onPressed: (){
+                signin();
+              }, child: Text('Sign In',
               style: TextStyle(
                 color: Colors.white,fontSize: 25,
                 fontWeight: FontWeight.bold),

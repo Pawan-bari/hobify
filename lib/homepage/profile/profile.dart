@@ -10,6 +10,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  TextEditingController controlleremail = TextEditingController();
   final String url ='https://i.pinimg.com/736x/2b/bc/47/2bbc47578113791e42e1063d39acd9e3.jpg';
   @override
   
@@ -62,8 +63,9 @@ class _ProfileState extends State<Profile> {
                  
                 
                 ),
-            Text('Pawan',style: TextStyle(color: Colors.white,fontSize: 30),)
-            ,Text('Email',style: TextStyle(color: Colors.white70),)
+            Text(authServices.value.currentUser!.displayName ?? 'Default'
+              ,style: TextStyle(color: Colors.white,fontSize: 30),)
+            ,Text(authServices.value.currentUser!.email ?? 'email' ,style: TextStyle(color: Colors.white70),)
             ]
             )
               ),
@@ -79,6 +81,36 @@ class _ProfileState extends State<Profile> {
               
               ),
               SizedBox(height: 10,),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: ListTile(
+                             title: Text('Update username',style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold,fontSize: 20),),
+                         
+                             selected: true,
+                             onTap: (){
+                              Navigator.pushNamed(context, 'updateusername');
+                             },
+                             
+                             shape: RoundedRectangleBorder(
+                               borderRadius: BorderRadius.circular(20)
+                             ),
+                           ),
+               ),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: ListTile(
+                               title: Text('Delete Account',style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold,fontSize: 20),),
+                           
+                               selected: true,
+                               onTap: (){
+                                Navigator.pushNamed(context, 'delete');
+                               },
+                               
+                               shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(20)
+                               ),
+                             ),
+               ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
@@ -93,7 +125,9 @@ class _ProfileState extends State<Profile> {
               borderRadius: BorderRadius.circular(20)
             ),
           ),
-        )
+          
+        ),
+         
               ]
         ))
       ),
@@ -146,7 +180,7 @@ class _ProfileState extends State<Profile> {
   }
   
   void poppage() {
-    Navigator.pop(context);
+    Navigator.popAndPushNamed(context,'/getting-started');
   }
 
 }
