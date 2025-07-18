@@ -1,4 +1,4 @@
-# spotify
+# Hobify
 
 A new Flutter project.
 
