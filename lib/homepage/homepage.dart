@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:spotify/controller/Authentication/auth_services.dart';
 import 'package:spotify/homepage/profile/profile.dart';
 
 class Homepage extends StatefulWidget {
@@ -11,14 +13,41 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+   String _profileImageUrl = '';
   int _selectindex = 0;
 
-  final List<Widget> _pages = [
+  List<Widget> _pages = [
+    
     
     Profile(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the pages list
+    _pages = [ Profile()];
+    // Fetch the user's profile image URL when the widget is created
+    _fetchProfileImageUrl();
+  }
 
-  final String url ='https://i.pinimg.com/736x/2b/bc/47/2bbc47578113791e42e1063d39acd9e3.jpg';
+
+  
+   Future<void> _fetchProfileImageUrl() async {
+    final uid = authServices.value.currentUser?.uid;
+    if (uid == null) return;
+
+    try {
+      final doc = await FirebaseFirestore.instance.collection('userprofile').doc(uid).get();
+      // Check if the widget is still mounted before calling setState
+      if (mounted && doc.exists) {
+        setState(() {
+          _profileImageUrl = doc.data()?['profile_image_url'] ?? '';
+        });
+      }
+    } catch (e) {
+      print("Error fetching profile image URL: $e");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,8 +90,14 @@ class _HomepageState extends State<Homepage> {
             GButton(icon:  HugeIcons.strokeRoundedLibraries,
                     text: 'Library',),
             GButton(leading: CircleAvatar(
-                      backgroundImage: NetworkImage(url),
-                    ),icon: Icons.abc_outlined,
+                      backgroundImage: _profileImageUrl.isNotEmpty
+                      ? NetworkImage(_profileImageUrl)
+                      : null,
+                  child: _profileImageUrl.isEmpty
+                      ? const Icon(Icons.person, size: 18, color: Colors.white70)
+                      : null,
+                ),
+                icon: Icons.person,
                     text: 'Profile',
                     )
           ]),

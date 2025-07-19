@@ -1,7 +1,10 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/controller/Authentication/auth_services.dart';
 import 'package:spotify/login&registerpages/loginui.dart';
+import 'package:spotify/controller/databa/firestore.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -15,9 +18,11 @@ class _RegisterState extends State<Register> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
   TextEditingController controllername = TextEditingController();
+  final String url ='https://i.pinimg.com/736x/2b/bc/47/2bbc47578113791e42e1063d39acd9e3.jpg';
   final formKey = GlobalKey<FormState>();
   String errmsg ='';
   
+
   @override
   void dispose(){
     controllerEmail.dispose();
@@ -26,29 +31,46 @@ class _RegisterState extends State<Register> {
     super.dispose();
   }
 
-  
-void register() async {
+ 
 
-  if (controllerEmail.text.trim().isEmpty || controllerPass.text.trim().isEmpty) {
-    setState(() {
-      errmsg = "Email and password fields cannot be empty";
-    });
+  
+void registerUserAndCreateProfile() async {
+  
+  String name = controllername.text.trim();
+  String email = controllerEmail.text.trim();
+  String password = controllerPass.text.trim();
+
+  if (name.isEmpty || email.isEmpty || password.isEmpty) {
+    
     return;
   }
 
   try {
-    await authServices.value.createuser(
-      email: controllerEmail.text.trim(),
-      pass: controllerPass.text.trim(),
+    
+    UserCredential userCredential = await authServices.value.createuser(
+      email: email,
+      pass: password,
     );
-    await authServices.value.updateusername(username: controllername.text);
-    push();
+
+    User? newUser = userCredential.user;
+
+    if (newUser != null) {
+      
+      await newUser.updateDisplayName(name);
+
+      
+      
+      await Storedata().saveUserData(uid: newUser.uid, name: name, email: email);
+      
+      
+      if (mounted) {
+        Navigator.pushNamed(context, 'homepage');
+      }
+    }
   } on FirebaseAuthException catch (e) {
-    setState(() {
-      errmsg = e.message ?? "There is an error";
-    });
+    
+    print(e.message);
   }
-  
 }
 void push()async{
   Navigator.pushNamed(context, 'homepage');
@@ -85,7 +107,7 @@ void push()async{
               TextButton(onPressed: (){}, child: Text('Click here',style: 
               TextStyle(color: Color.fromRGBO(66, 200, 60, 1)),),)
             ],),
-            //Name
+            
               SizedBox(height: 20,),
             Padding(padding: 
             const EdgeInsets.only(left: 25, right: 25),
@@ -103,7 +125,7 @@ void push()async{
               ),
             )
             ),
-            // email
+            
             SizedBox(height: 20,),
              Padding(
              padding: const EdgeInsets.only(left: 25, right: 25),
@@ -125,7 +147,7 @@ void push()async{
              ),
              
            ),
-           //password
+           
             SizedBox(height: 20,),
             Padding(padding: 
             const EdgeInsets.only(left: 25, right: 25),
@@ -148,7 +170,7 @@ void push()async{
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
               child: ElevatedButton(onPressed: (){
-                register();
+                registerUserAndCreateProfile();
               }, child: Text('Create Account',
               style: TextStyle(
                 color: Colors.white,fontSize: 25,
