@@ -98,14 +98,14 @@ void dispose() {
            imageurl != null
     ? Image.network(
         imageurl!,
-        height: 500,
-        width: 500,
+        height: 450,
+        width: 450,
         fit: BoxFit.cover,
       )
     : Image.asset(
         'Images/bb.jpg',
-        height: 500,
-        width: 500,
+        height: 450,
+        width: 450,
         fit: BoxFit.cover,
       ),
             SizedBox(height: 30,),
