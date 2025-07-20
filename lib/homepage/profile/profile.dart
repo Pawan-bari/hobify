@@ -6,8 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:spotify/controller/Authentication/auth_services.dart';
-import 'package:spotify/controller/databa/firestore.dart';
+import 'package:spotify_clone/controller/Authentication/auth_services.dart';
+import 'package:spotify_clone/controller/databa/firestore.dart';
 
 
 class Profile extends StatefulWidget {

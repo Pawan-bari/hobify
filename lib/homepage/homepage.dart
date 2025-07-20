@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:spotify/controller/Authentication/auth_services.dart';
-import 'package:spotify/homepage/profile/profile.dart';
+import 'package:spotify_clone/controller/Authentication/auth_services.dart';
+import 'package:spotify_clone/homepage/home.dart';
+import 'package:spotify_clone/homepage/profile/profile.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -17,7 +18,7 @@ class _HomepageState extends State<Homepage> {
   int _selectindex = 0;
 
   List<Widget> _pages = [
-    
+    Home(),
     
     Profile(),
   ];
@@ -25,7 +26,7 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     super.initState();
     // Initialize the pages list
-    _pages = [ Profile()];
+    _pages = [ Home(), Profile()];
     // Fetch the user's profile image URL when the widget is created
     _fetchProfileImageUrl();
   }

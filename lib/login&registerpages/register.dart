@@ -2,9 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:spotify/controller/Authentication/auth_services.dart';
-import 'package:spotify/login&registerpages/loginui.dart';
-import 'package:spotify/controller/databa/firestore.dart';
+import 'package:spotify_clone/controller/Authentication/auth_services.dart';
+import 'package:spotify_clone/login&registerpages/loginui.dart';
+import 'package:spotify_clone/controller/databa/firestore.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

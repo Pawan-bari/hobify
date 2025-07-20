@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/login&registerpages/loginui.dart';
+import 'package:spotify_clone/login&registerpages/loginui.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

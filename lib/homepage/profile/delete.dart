@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/controller/Authentication/auth_services.dart';
+import 'package:spotify_clone/controller/Authentication/auth_services.dart';
 
 class Delete extends StatefulWidget {
   const Delete({super.key});
