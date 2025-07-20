@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:spotify_clone/controller/Authentication/auth_services.dart';
+import 'package:spotify_clone/homepage/Library/Library.dart';
+import 'package:spotify_clone/homepage/Search/serch.dart';
 import 'package:spotify_clone/homepage/home.dart';
 import 'package:spotify_clone/homepage/profile/profile.dart';
 
@@ -19,15 +21,16 @@ class _HomepageState extends State<Homepage> {
 
   List<Widget> _pages = [
     Home(),
-    
+    Search(),
+    Library(),
     Profile(),
   ];
   @override
   void initState() {
     super.initState();
-    // Initialize the pages list
-    _pages = [ Home(), Profile()];
-    // Fetch the user's profile image URL when the widget is created
+    
+    _pages = [ Home(), Search(),Library(),Profile()];
+    
     _fetchProfileImageUrl();
   }
 
@@ -39,7 +42,7 @@ class _HomepageState extends State<Homepage> {
 
     try {
       final doc = await FirebaseFirestore.instance.collection('userprofile').doc(uid).get();
-      // Check if the widget is still mounted before calling setState
+      
       if (mounted && doc.exists) {
         setState(() {
           _profileImageUrl = doc.data()?['profile_image_url'] ?? '';

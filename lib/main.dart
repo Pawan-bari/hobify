@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:spotify_clone/Audio%20page/player.dart';
 import 'package:spotify_clone/controller/Authentication/auth_state.dart';
+import 'package:spotify_clone/homepage/Search/serch.dart';
 import 'package:spotify_clone/homepage/homepage.dart';
 import 'package:spotify_clone/homepage/profile/delete.dart';
 import 'package:spotify_clone/homepage/profile/profile.dart';
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
         'recoverpass' :(context) => const Recoverpass(),
         'updateusername' :(context) => const Updateusername(),
         'delete':(context)=>const Delete(),
-        'player':(context)=>const Player(),
+        
+        'serch':(context)=>const Search(),
               },
       
       debugShowCheckedModeBanner: false,
