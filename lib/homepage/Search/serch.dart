@@ -112,7 +112,7 @@ for (var page in Search) {
                   Align(
                     alignment: Alignment.centerLeft
                         ,child:
-              Text('Recent Search',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20,),)
+              Text('',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20,),)
                       )]),
             )],
         ),

@@ -45,6 +45,8 @@ dependencies:
   audio_video_progress_bar: ^2.0.3
   spotify: ^0.13.7
   youtube_explode_dart: ^2.5.1
+  share_plus: ^7.2.2
+  
   
 
 
